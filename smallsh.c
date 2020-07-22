@@ -95,26 +95,23 @@ array runningProcesses;
 // Handler for SIGNINT
 void handle_SIGINT(int signo)
 {
-    if (runningProcesses.size == 0)
-    {
-        return;
-    }
+    return;
 }
 
 // Handler for SIGNSTP
 void handle_SIGTSTP(int signo)
 {
-    // Diable foreground only mode
+    // Disable foreground only mode
     if (isForegroundOnly)
     {
-        char message[30] = "Exiting foreground-only mode\n";
+        char *message = "Exiting foreground-only mode\n";
         write(STDOUT_FILENO, message, 29);
         isForegroundOnly = false;
     }
     // Enable foreground only mode
     else
     {
-        char message[50] = "Entering foreground-only mode (& is now ignored)\n";
+        char *message = "Entering foreground-only mode (& is now ignored)\n";
         write(STDOUT_FILENO, message, 49);
         isForegroundOnly = true;
     }
