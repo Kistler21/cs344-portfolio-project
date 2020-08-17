@@ -1,11 +1,3 @@
-# Introduction
-In this assignment, you will write your own shell in C. After successful completion of this assignment, you should be able to do the following
-- Describe the Unix process API (Module 4, MLO2)
-- Write programs using the Unix process API (Module 4, MLO3)
-- Explain the concept of signals and their uses (Module 5, MLO2)
-- Write programs using the Unix API for signal handling (Module 5, MLO3)
-- Explain I/O redirection and write programs that can employ I/O redirection (Module 5, MLO4)
-
 # Instructions
 ## Overview
 In this assignment you will write your own shell in C, similar to bash. No other languages, including C++, are allowed, though you may use C99. The shell will run command line instructions and return the results similar to other shells you have used, but without many of their fancier features.
@@ -15,10 +7,6 @@ In this assignment you will write your own shell, called smallsh. This will work
 Your shell will allow for the redirection of standard input and standard output and it will support both foreground and background processes (controllable by the command line and by receiving signals).
 
 Your shell will support three built in commands: `exit`, `cd`, and `status`. It will also support comments, which are lines beginning with the `#` character.
-
-During the development of this program, take extra care to only do your work on our class server, as your software will likely negatively impact whatever machine it runs on, especially before it is finished. If you cause trouble on one of the non-class, public servers, it could hurt your grade! If you are having trouble logging in to any of our EECS servers because of runaway processes, please use this page to kill off any programs running on your account that might be blocking your access:
-
-[T.E.A.C.H. - The Engineering Accounts and Classes Homepage](https://teach.engr.oregonstate.edu/teach.php?type=kill_runaway_processes)
 
 ## Specifications
 **The Prompt**
@@ -159,52 +147,3 @@ background pid is 4963
  Mon Jan 2 11:24:39 PST 2017
 : exit $
 ```
-## Hints
-- It is recommended that you program the built-in commands first, before tackling the `fork()`, `exec()`, `waitpid()` specifications.
-- Don't forget to use `fflush(stdout)`, as described above!
-- As stated above, make sure you work with the grading script on our class server from the very beginning - don't leave this to the end!
-
-**Re-Entrancy**
-
-Reentrancy is important when we consider that signal handlers cause jumps in execution that cause problems with certain functions. Note that the `printf()` family of functions is NOT reentrant. In your signal handlers, when outputting text, you must use other output functions!
-
-**Where to Program**
-
-I HIGHLY recommend that you develop this program directly on our course server. Doing so will prevent you from having problems transferring the program back and forth and having compatibility problems. You have been warned: it will not behave the same on your own computer!
-
-If you do see ^M characters all over your files, try this command:
-```
-$ dos2unix bustedFile
-```
-# What to Turn In and When
-Please submit a single zip file of your program code, which may be in as many different files as you want. Also, inside that zip file, you must provide a file called "README" that contains instructions on HOW to compile your code; you may compile your code however you wish. DO NOT include a copy of the testing script. As our Syllabus says, please be aware that neither the Instructor nor the TA(s) are alerted to comments added to the text boxes in Canvas that are alongside your assignment submissions, and they may not be seen. No notifications (email or otherwise) are sent out when these comments are added, so we aren't aware that you have added content! If you need to make a meta-comment about this assignment, please include it in the README file in your .zip file, or email the person directly who will be grading it (see the Home page for grading responsibilities).
-
-The graders will compile your code according to your exact specifications. They will make a reasonable effort to make it work, but if it doesn’t compile, you’ll receive a zero on this assignment.
-
-# Grading Criteria
-This assignment is worth 20% of your grade and there are 180 points available for it.
-
-170 points are available in the test script, while the final 10 points will be based on your style, readability, and commenting. Comment well, often, and verbosely: we want to see that you are telling us WHY you are doing things, in addition to telling us WHAT you are doing.
-
-Once the program is compiled, according to your specifications given in "readme.txt", your shell will be executed to run a few sample commands against (ls, status, exit, in that order). If the program does not successfully work on those commands, it will receive a zero. If it works, it will have the p2testscript program ran against it (as detailed below) for final grading. Points will be assigned according to the test script running on our class server only, so make sure it runs there.
-
-The TAs will use this exact set of instructions: Program2 Grading Document ([PDF](https://canvas.oregonstate.edu/courses/1806251/files/80436999/download?wrap=1) | [WORD](https://canvas.oregonstate.edu/courses/1806251/files/80437000/download?wrap=1)) to grade your submission.
-
-## Grading Method
-This assignment is provided with the actual grading test script that will be used to assign your program a grade. Your program must function with this grading script, as follows. To run it, place it in the same directory as your compiled shell, chmod it (`chmod +x ./p2testscript`) and run this command from a bash prompt:
-```
-$ p2testscript 2>&1
-```
-or
-```
-$ p2testscript 2>&1 | more
-```
-or
-```
-$ p2testscript > mytestresults 2>&1
-```
-Do not worry if the spacing, indentation, or look of the output of the script is different than when you run it interactively: that won’t affect your grade. The script may add extra colons at the beginning of lines or do other weird things, like put output about terminating processes further down the script than you intended. Use the script to prepare for your grade, as this is how it's being earned.
-
-Note that as an extra challenge, no "clean run" script is provided for Program 3: you'll need to interpret the results of your program yourself.
-
-If your program does not work with the grading script, and you instead request that we grade your script by hand, we will have to apply a 50% reduction to your final score. Make sure you work with the grading script on our class server from the very beginning!
